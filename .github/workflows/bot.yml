@@ -1,0 +1,17 @@
+name: Pump.fun Monitor - Shift 1 (12 AM - 6 AM)
+on:
+  schedule:
+    - cron: '0 0 * * *'
+    timezone: "Asia/Kolkata"
+  workflow_dispatch:
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install aiohttp python-telegram-bot
+      - run: python monitor.py
